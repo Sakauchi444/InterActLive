@@ -7,6 +7,10 @@
             /* 全体のスタイル */
             body {
                 font-family: Arial, sans-serif;
+                margin: 0;
+            }
+
+            .view_wrapper {
                 margin: 20px;
             }
 
@@ -17,7 +21,6 @@
             h2 {
                 margin-top: 30px;
             }
-
             /* イベントの写真グリッド */
             .event-grid {
                 display: flex;
@@ -34,7 +37,6 @@
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 transition: filter 0.3s;
             }
-
             .event-image:hover {
                 filter: brightness(0.8);
             }
@@ -66,24 +68,34 @@
                 background-color: #45a049;
             }
         </style>
+        <!-- ヘッダーCSS -->
+        <link rel="stylesheet" href="/static/css/header.css">
     </head>
 
+    
+
     <body>
-        <h1>ホーム 画面</h1>
+        {% include "./components/header.html" %}
 
-        <h2>現在のイベント</h2>
-        <div class="event-grid">
-            {% for event in events %}
-            <a href="/event/{{ event.id }}">
-                <img src="{{ event.image }}" class="event-image">
-            </a>
-            {% endfor %}
-        </div>
+        {% block content %}
+        <div class="view_wrapper">
+            <h1>ホーム 画面</h1>
 
-        <h2>商品交換の説明</h2>
-        <p class="exchange-description">{{ exchange_description }}</p>
+            <h2>現在のイベント</h2>
+            <div class="event-grid">
+                {% for event in events %}
+                <a href="/event/{{ event.id }}">
+                    <img src="{{ event.image }}" class="event-image">
+                </a>
+                {% endfor %}
+            </div>
 
-        <a href="/exchange"><button>商品交換へ</button></a>
+            <h2>商品交換の説明</h2>
+            <p class="exchange-description">{{ exchange_description }}</p>
+
+            <a href="/exchange"><button>商品交換へ</button></a>
+        </div>    
+        {% endblock %}
     </body>
-
+    
 </html>
