@@ -24,7 +24,7 @@ def home():
     # 商品交換の説明
     exchange_description = "商品交換の説明文です。"
     
-    return render_template('./home.html', events=events, exchange_description=exchange_description)
+    return render_template('home.html',events=events,exchange_description=exchange_description)
 
 @app.route("/exchange")
 def rewardlist():
@@ -34,6 +34,7 @@ def rewardlist():
 @app.route("/recieve_reward")
 def recievereward():
     # ポイント消費処理
+    rewardlist= reward_list.main()
     return render_template("reward.html",list = rewardlist)
 
 ## 実行
