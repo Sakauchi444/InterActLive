@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from flask import Flask,render_template,request
 import reward_list
 
@@ -18,11 +21,16 @@ def home():
         {
             'id': '3',
             'image': '/static/event3.png'
-        }
+        },
     ]
     
     # 商品交換の説明
-    exchange_description = "商品交換の説明文です。"
+    exchange_description = '''
+                            スポーツ観戦の新たな興奮が待っています！<br/>
+                            参加してポイントを貯め、素晴らしい商品と交換しましょう！
+                            応援グッズやオフィシャルアイテムなど、あなたのスポーツ愛をさらに深めるチャンスです。
+                            ホームページで詳細をチェック！」
+                            '''
     
     return render_template('home.html', events=events, exchange_description=exchange_description)
 
