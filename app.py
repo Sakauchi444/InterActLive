@@ -1,3 +1,11 @@
+import os
+import openai
+import re
+openai.api_type = "azure"
+openai.api_base = "https://sample-ken-uk.openai.azure.com/"
+openai.api_version = "2023-03-15-preview"
+openai.api_key = "24959fc582944f77ac07cb77da6b8c0f"
+
 from flask import Flask,render_template,request, session, url_for, redirect
 from datetime import timedelta
 
@@ -12,44 +20,40 @@ def main_page():
         text = "ここに結果が出力されます"
         return render_template("page.html",text=text)
     elif request.method == 'POST':
-        session.permanent = True
-        session["point"] = 0
-        session["ques_num"] = 1
-
         name = request.form["name"]
         text = "こんにちは" + name + "さん"
         return render_template("page.html",text=text)
 
 @app.route("/event/<int:id>", methods=["GET"])
 def event(id):
-    session["event_id"] = id
+    return render_template("event.html", event_id=id)
 
-    return render_template("event.html", event_id=id, point=session["point"])
-
-@app.route("/question", methods=["GET", "POST"])
+@app.route("/question", methods=["GET"])
 def question():
-    if session["ques_num"] >= 5:
-        return redirect(url_for('event', id=session["event_id"]))
 
-    if request.method == 'GET':
-        ques_txt = "問題サンプル"
-        choice_list = ["c1", "c2", "c3", "c4"]
-        session["answer"] = "c1"
+    #質問の設定
+    content = "#命令書\nあなたはクイズの出題者です。Data Sourceの情報に基づいてワールドカップにまつわるクイズを4題出題してください\n#制約条件\n– データセットを参照して回答してください。\n– 異なる4択の選択肢とその答えを作成してください。\n– 日本語で問題を作成してください。\n#出題例\n\n問題文:FIFAワールドカップの優勝回数が最も多い国はどこですか?\na) ブラジル\nb) イタリア\nc) アルゼンチン\nd) ドイツ\n答え: a) ブラジル"
 
-        return render_template("question.html", point=session["point"], ques_num=session["ques_num"], ques_txt=ques_txt, choice_list=choice_list, event_id=session["event_id"])
-    elif request.method == 'POST':
-        if request.form.get('q') == session["answer"]:
-            session["point"] += 10
+    response = openai.ChatCompletion.create(
+    engine="sample-ken-deploy",
+    messages = [{"role":"system","content":"You are an AI assistant that helps people find information."},{"role":"user","content":content},],
+    temperature=0,
+    max_tokens=800,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0,
+    stop=None)
 
-        session["ques_num"] += 1
-        ques_txt = "問題サンプル" + str(session["ques_num"])
-        choice_list = ["c1", "c2", "c3", "c4"]
-        session["answer"] = "c1"
+    ques_response = response['choices'][0]['message']['content']
+    ques_split = re.split('問題|答え|a\)|b\)|c\)|d\)', ques_response)
+    print(ques_split)
 
-        if session["ques_num"] >= 5:
-            return redirect(url_for('event', id=session["event_id"]))
-        else:
-            return render_template("question.html", point=session["point"], ques_num=session["ques_num"], ques_txt=ques_txt, choice_list=choice_list, event_id=session["event_id"])
+
+    ques_txt = "～問題文～"
+    choice_list = ["c1", "c2", "c3", "c4"]
+    answer = "c1"
+
+    return render_template("question.html", ques_txt=ques_txt, choice_list=choice_list, answer=answer)
 
 ## 実行
 if __name__ == "__main__":
