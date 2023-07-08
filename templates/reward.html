@@ -10,16 +10,15 @@
             <div id="main">
               <section id="pagetop">
                 <section class="box">
-                  <h2 class="title">Reward<span>景品一覧</span></h2>
+                  <h2 class="title">Reward<span>景品一覧</span></h2><br>
                   <div>
-                    <h2>交換する景品を選択してください</h2>
+                    <h1>交換する景品を選択してください</h1>
+                    <br>
                     <script type="text/javascript">
 						let list_data = {{ list | tojson }};
 					</script> 
-                    <div id="table-wrapper"></div>
-                    <script type="text/javascript" src = "../static/js/disp_reward.js"></script>
-                    <div id="item-box">
-                      <a id="item-title">aaa</a>
+                    <div id="table-wrapper">
+                      <script type="text/javascript" src = "../static/js/disp_reward.js"></script>
                     </div>
                   </div>
                 </section>
