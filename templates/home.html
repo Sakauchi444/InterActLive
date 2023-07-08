@@ -4,12 +4,6 @@
     <head>
         <title>ホーム画面</title>
         <style>
-            /* 全体のスタイル */
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-            }
-
             .view_wrapper {
                 margin: 20px;
             }
@@ -70,6 +64,8 @@
         </style>
         <!-- ヘッダーCSS -->
         <link rel="stylesheet" href="/static/css/header.css">
+        <!-- 全部のページに適用するCSS -->
+        <link rel="stylesheet" href="/static/css/all.css">
     </head>
 
     
@@ -94,6 +90,7 @@
             <p class="exchange-description">{{ exchange_description }}</p>
 
     <a href="/exchange"><button>商品交換へ</button></a>
+        {% endblock %}
 </body>
 
 </html>
