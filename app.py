@@ -31,6 +31,11 @@ def rewardlist():
     rewardlist= reward_list.main()
     return render_template("reward.html",list = rewardlist)
 
+@app.route("/recieve_reward")
+def recievereward():
+    # ポイント消費処理
+    return render_template("reward.html",list = rewardlist)
+
 ## 実行
 if __name__ == "__main__":
     app.run(debug=True)
