@@ -1,95 +1,168 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>ホーム画面</title>
-        <style>
-            .view_wrapper {
-                margin: 20px;
+<head>
+    <title>ホーム画面</title>
+    <style>
+        .view_wrapper {
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        /* イベントの写真グリッド */
+        .event-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .event-image {
+            width: 500px;
+            height: auto;
+            object-fit: cover;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: filter 0.3s;
+        }
+
+        .event-image:hover {
+            filter: brightness(0.8);
+        }
+
+        /* 商品交換の説明 */
+        .exchange-description {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* 商品交換へのボタン */
+        .exchange-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .exchange-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .exchange-button button:hover {
+            background-color: #45a049;
+        }
+
+        a.btn_ao_b {
+            display: flex;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 1.3rem 2rem;
+            border: 2px solid #014897;
+            background: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a.btn_ao_b:hover {
+            background-color: #e9f3fd;
+        }
+
+        a.btn_ao_b .b__text {
+            display: block;
+            flex-grow: 1;
+            color: #004386;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            padding-right: 15px;
+            font-size: 23px;
+        }
+
+        a.btn_ao_b .b__text::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            transform: rotate(45deg);
+            border-top: 3px solid #014897;
+            border-right: 3px solid #014897;
+            box-sizing: border-box;
+            width: 14px;
+            height: 14px;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 1200px) {
+            a.btn_ao_b .b__text {
+                font-size: 18px;
+                padding-right: 20px;
             }
 
-            h1 {
-                text-align: center;
+            a.btn_ao_b .b__text::after {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        @media (max-width: 736px) {
+            a.btn_ao_b .b__text {
+                font-size: 14px;
+                padding-right: 20px;
             }
 
-            h2 {
-                margin-top: 30px;
+            a.btn_ao_b .b__text::after {
+                width: 10px;
+                height: 10px;
             }
-            /* イベントの写真グリッド */
-            .event-grid {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        }
+    </style>
+    <!-- ヘッダーCSS -->
+    <link rel="stylesheet" href="/static/css/header.css">
+    <!-- 全部のページに適用するCSS -->
+    <link rel="stylesheet" href="/static/css/all.css">
+</head>
 
-            .event-image {
-                width: 550px;
-                height: auto;
-                object-fit: cover;
-                margin: 10px;
-                border-radius: 10px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                transition: filter 0.3s;
-            }
-            .event-image:hover {
-                filter: brightness(0.8);
-            }
 
-            /* 商品交換の説明 */
-            .exchange-description {
-                margin-top: 20px;
-                text-align: center;
-            }
 
-            /* 商品交換へのボタン */
-            .exchange-button {
-                display: block;
-                text-align: center;
-                margin-top: 20px;
-            }
+<body>
+    {% include "./components/header.html" %}
 
-            .exchange-button button {
-                padding: 10px 20px;
-                font-size: 16px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
+    {% block content %}
+    <div class="view_wrapper">
+        <h1>現在のイベント</h1>
+        <div class="event-grid">
+            {% for event in events %}
+            <a href="/event/{{ event.id }}">
+                <img src="{{ event.image }}" class="event-image">
+            </a>
+            {% endfor %}
+        </div>
 
-            .exchange-button button:hover {
-                background-color: #45a049;
-            }
-        </style>
-        <!-- ヘッダーCSS -->
-        <link rel="stylesheet" href="/static/css/header.css">
-        <!-- 全部のページに適用するCSS -->
-        <link rel="stylesheet" href="/static/css/all.css">
-    </head>
+        <h1>商品交換の説明</h1>
+        <!-- <p class="exchange-description">{{ exchange_description }}</p> -->
+        <p class="exchange-description">スポーツ観戦の新たな興奮が待っています！参加してポイントを貯め、素晴らしい商品と交換しましょう！<br />
+            応援グッズやオフィシャルアイテムなど、あなたのスポーツ愛をさらに深めるチャンスです。<br />
+            ホームページで詳細をチェック！
+        </p>
 
-    
-
-    <body>
-        {% include "./components/header.html" %}
-
-        {% block content %}
-        <div class="view_wrapper">
-            <h1>ホーム 画面</h1>
-
-            <h2>現在のイベント</h2>
-            <div class="event-grid">
-                {% for event in events %}
-                <a href="/event/{{ event.id }}">
-                    <img src="{{ event.image }}" class="event-image">
-                </a>
-                {% endfor %}
-            </div>
-
-            <h2>商品交換の説明</h2>
-            <p class="exchange-description">{{ exchange_description }}</p>
-
-    <a href="/exchange"><button>商品交換へ</button></a>
+        <section>
+            <a href="exchange" class="btn_ao_b"><span class="b__text">商品交換へGO!</span></a>
+        </section>
         {% endblock %}
 </body>
 
