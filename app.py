@@ -45,15 +45,26 @@ def question():
     stop=None)
 
     ques_response = response['choices'][0]['message']['content']
-    ques_split = re.split('問題|答え|a\)|b\)|c\)|d\)', ques_response)
+    print(ques_response)
+
+    ques_split = re.split('\?|？|答え:|答え：|\n\n', ques_response)
     print(ques_split)
 
+    ques_list = []
+    for i in range(len(ques_split)):
+        temp = ques_split[i].replace('\n', '  ')
+        if i % 3 == 0:
+            m = re.findall('.*:(.*)', temp)
+            print(m)
+            ques_list.append(m[0])
+        else:
+            ques_list.append(temp)
 
-    ques_txt = "～問題文～"
-    choice_list = ["c1", "c2", "c3", "c4"]
-    answer = "c1"
+    # ques_list = ["q1", "a", "q2", "b", "q3", "c", "q4", "d"]
 
-    return render_template("question.html", ques_txt=ques_txt, choice_list=choice_list, answer=answer)
+    print(ques_list)
+
+    return render_template("question.html", ques_list=ques_list)
 
 ## 実行
 if __name__ == "__main__":
