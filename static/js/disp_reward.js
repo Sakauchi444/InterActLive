@@ -5,7 +5,6 @@ for (var i=0; i<list_data.length; i++){
     document.write('<form method="post" action="/recieve_reward"><input type="submit" class="nes-btn is-success" value="購入"></form>');
     document.write('<br>');
 }
-
 const createItem = (item = null) => {
     const e = document.createElement('div')
     e.className = 'item-box'
