@@ -11,7 +11,7 @@ header {
 header .logo {
 	padding: 0 50px;
 	font-size: 18px;
-  font-weight: bold;
+	font-weight: bold;
 	color: #fff;
 	letter-spacing: .2em;
 }
@@ -31,7 +31,15 @@ header li {
 }
 header li a {
 	color: #fff;
-  text-decoration: none;
+	text-decoration: none;
+}
+header #point_disp {
+	color: #ddaa66;
+	font-weight:bold;
+}
+header #logout {
+	color: #f00;
+	cursor: pointer;
 }
 /* メニューのリンクホバーで線 */
 header li a:hover {
