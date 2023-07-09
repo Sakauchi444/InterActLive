@@ -50,3 +50,10 @@ def main():
             "detail":"最高のロケーションにある席で試合を観戦する権利。"
         },
       ]
+
+def point_change(id):
+    reward_list = main()
+    for i in reward_list:
+        if i['id'] == id:
+            return i['price'],i
+    return 0,i

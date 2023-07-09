@@ -46,10 +46,11 @@ def rewardlist():
     rewardlist= reward_list.main()
     return render_template("reward.html",list = rewardlist)
 
-@app.route("/recieve_reward")
-def recievereward():
-    # ポイント消費処理
-    return render_template("reward.html",list = rewardlist)
+@app.route("/recieve_reward/<int:id>")
+def recievereward(id):
+    print(id)
+    usepoint,rewardlist = reward_list.point_change(id)
+    return render_template("complete_recieve.html",list = rewardlist)
 
 @app.route("/login", methods=["GET"])
 def login():
