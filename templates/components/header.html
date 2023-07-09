@@ -1,8 +1,18 @@
 <header>
   <p class="logo"><a href="/">InterActLive</a></p>
   <ul>
+    <li><p id="point_disp""></p></li>
     <li><a href="/">ホーム</a></li>
     <!-- <li><a href="#!">リンク2</a></li> -->
     <li><a href="/exchange">商品交換</a></li>
+    <li><p id="logout">ログアウト</p></li>
   </ul>
-  </header>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</header>
+<script>
+  document.getElementById('point_disp').innerHTML = localStorage.getItem('point') + 'P';
+  $('#logout').on('click', function () {
+    localStorage.removeItem('current_user');
+    location.href = '/';
+  });
+</script>

@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Page</title>
-    </head>
-    <body>
-        <h1>イベント：{{event_id}}</h1>
-        <h1 id="point_disp"></h1>
+<head>
+    <meta charset="utf-8">
+    <title>{{eventdetail}}</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        .event-img-box {
+            text-align: center;
+        }
+        .event-image {
+            width: 500px;
+            height: auto;
+            object-fit: cover;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: filter 0.3s;
+        }
+    </style>
+    <!-- ヘッダーCSS -->
+    <link rel="stylesheet" href="/static/css/header.css">
+    <!-- 全部のページに適用するCSS -->
+    <link rel="stylesheet" href="/static/css/all.css">
+</head>
+<body>
+    {% include "./components/header.html" %}
+    {% block content %}
+        <h1>{{eventdetail}}</h1>
+        <div class="event-img-box">
+            <img src="{{ image }}" class="event-image">
+        </div>
 
-        <a href="/">トップへ</a>
         <a href="/question">問題ページへ</a>
-    </body>
-    <script>
-        localStorage.setItem('event_id', {{event_id}});
-        document.getElementById('point_disp').innerHTML = 'ポイント:' + localStorage.getItem('point');
-    </script>
+    {% endblock %}
+</body>
+<script>
+    localStorage.setItem('event_id', {{event_id}});
+</script>
 </html>

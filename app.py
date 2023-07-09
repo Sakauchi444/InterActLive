@@ -58,7 +58,24 @@ def login():
 
 @app.route("/event/<int:id>", methods=["GET"])
 def event(id):
-    return render_template("event.html", event_id=id)
+    # events = ['日本 vs ブラジル', 'スペイン vs ブラジル', 'スペイン vs 日本']
+    # images = []
+    events = [
+        [
+            '日本 vs ブラジル',
+            '/static/event1.png'
+        ],
+        [
+            'スペイン vs ブラジル',
+            '/static/event2.png'
+        ],
+        [
+            'スペイン vs 日本',
+            '/static/event3.png'
+        ]
+    ]
+
+    return render_template("event.html", eventdetail=events[id-1][0], image=events[id-1][1], event_id=id)
 
 @app.route("/question", methods=["GET"])
 def question():
