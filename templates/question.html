@@ -100,24 +100,25 @@
         data.push("{{ques_list[9]}}");
         data.push("{{ques_list[10]}}");
         data.push("{{ques_list[11]}}");
+        data.push("{{ques_list[12]}}");
         console.log(data)
 
         document.getElementById('event_disp').innerHTML = 'イベント:' + localStorage.getItem('event_id');
         document.getElementById('point_disp').innerHTML = 'ポイント:' + localStorage.getItem('point');
         document.getElementById('ques_num_disp').innerHTML = '問題番号:' + localStorage.getItem('ques_num');
-        document.getElementById('ques_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 3];
-        document.getElementById('choice_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 2];
+        document.getElementById('ques_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 2];
+        document.getElementById('choice_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 1];
 
         $('#judge').on('click', function () {
             result = document.forms.ansForm.choice.value;
-            if(result == data[3 * (parseInt(localStorage.getItem('ques_num'))) - 1][1]){
+            if(result == data[3 * parseInt(localStorage.getItem('ques_num'))][1]){
                 var point = parseInt(localStorage.getItem('point'));
                 point += 10;
                 localStorage.setItem('point', point);
                 document.getElementById("popup_correct").classList.toggle("is-show");
                 document.getElementById('point_disp').innerHTML = 'ポイント:' + localStorage.getItem('point');
             }else{
-                document.getElementById('correct_choice').innerHTML = '正解は ' + data[3 * (parseInt(localStorage.getItem('ques_num'))) - 1];
+                document.getElementById('correct_choice').innerHTML = '正解は ' + data[3 * parseInt(localStorage.getItem('ques_num'))];
                 document.getElementById("popup_incorrect").classList.toggle("is-show");
             }
 
@@ -139,8 +140,8 @@
             }
 
             document.getElementById('ques_num_disp').innerHTML = '問題番号:' + localStorage.getItem('ques_num');
-            document.getElementById('ques_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 3];
-            document.getElementById('choice_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 2];
+            document.getElementById('ques_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 2];
+            document.getElementById('choice_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 1];
             for(element of document.getElementById('radio')){
                 element.checked = false;
             }

@@ -10,7 +10,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </header>
 <script>
-  document.getElementById('point_disp').innerHTML = localStorage.getItem('point') + 'P';
+  document.getElementById('point_disp').innerHTML = localStorage.getItem('point') + ' P';
   $('#logout').on('click', function () {
     localStorage.removeItem('current_user');
     location.href = '/';
