@@ -4,13 +4,20 @@
         <meta charset="utf-8">
         <title>Page</title>
         <link rel="stylesheet" href="../static/css/reward.css">
+          <!-- ヘッダーCSS -->
+  <link rel="stylesheet" href="/static/css/header.css">
+  <!-- 全部のページに適用するCSS -->
+  <link rel="stylesheet" href="/static/css/all.css">
     </head>
     <body>
+      {% include "./components/header.html" %}
+
+      {% block content %}
         <div id="contents">
             <div id="main">
               <section id="pagetop">
                 <section class="box">
-                  <h2 class="title">Reward<span>景品一覧</span></h2><br>
+                  <h2 class="title"><span>商品交換完了</span></h2><br>
                   <div>
                     <h1>下記の景品を購入しました。<br>保有ポイント：<script type="text/javascript">document.write(localStorage.getItem('point'))</script></h1>
                     <br>
@@ -25,6 +32,6 @@
               </section>
             </div>
           </div>
-
+          {% endblock %}
    </body>
 </html>
