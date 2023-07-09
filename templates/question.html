@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Page</title>
+        <style>
+            .popup {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                opacity: 0;
+                visibility: hidden;
+                transition: .6s;
+            }
+            .popup-inner {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 80%;
+                max-width: 800px;
+                padding: 50px;
+                background-color: #A9A9A9;
+                z-index: 2;
+                border-radius: 3px;
+            }
+
+            .popup.is-show {
+                opacity: 1;
+                visibility: visible;
+            }
+            .popup.is-hidden {
+                opacity: 1;
+                visibility: hidden;
+            }
+
+            .message{
+                text-align:center;
+                font-size:22px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="event_disp">イベント：</h1>
+        <h1 id="point_disp">ポイント：</h1>
+        <h1 id="ques_num_disp">問題番号：</h1>
+        <pre id="ques_txt_disp">None</pre>
+        <pre id="choice_txt_disp">None</pre>
+
+        <form name="ansForm" id="radio">
+            <input type="radio" name="choice" value="a">a
+            <input type="radio" name="choice" value="b">b
+            <input type="radio" name="choice" value="c">c
+            <input type="radio" name="choice" value="d">d
+        </form>
+
+        <button type="button" onclick="history.back()">イベントに戻る</button>
+        <button type="button" id="judge" class="btn-default">正誤判定</button>
+
+        <div class="popup" id="popup_correct">
+            <div class="popup-inner">
+                <div class="message">正解です</div>
+                <button type="button" class="confirm">はい</button>
+            </div>
+        </div>
+        <div class="popup" id="popup_incorrect">
+            <div class="popup-inner">
+                <div class="message">
+                    不正解です
+                    <br><br>
+                    <p id="correct_choice"></p>
+                </div>
+                <button type="button" class="confirm">はい</button>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </body>
+
+    <script>
+        if(parseInt(localStorage.getItem('ques_num')) > 4){
+            location.href = '/event/' + localStorage.getItem('event_id');
+        }
+
+        var data = [];
+        data.push("{{ques_list[0]}}");
+        data.push("{{ques_list[1]}}");
+        data.push("{{ques_list[2]}}");
+
+        data.push("{{ques_list[3]}}");
+        data.push("{{ques_list[4]}}");
+        data.push("{{ques_list[5]}}");
+
+        data.push("{{ques_list[6]}}");
+        data.push("{{ques_list[7]}}");
+        data.push("{{ques_list[8]}}");
+
+        data.push("{{ques_list[9]}}");
+        data.push("{{ques_list[10]}}");
+        data.push("{{ques_list[11]}}");
+        console.log(data)
+
+        document.getElementById('event_disp').innerHTML = 'イベント:' + localStorage.getItem('event_id');
+        document.getElementById('point_disp').innerHTML = 'ポイント:' + localStorage.getItem('point');
+        document.getElementById('ques_num_disp').innerHTML = '問題番号:' + localStorage.getItem('ques_num');
+        document.getElementById('ques_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 3];
+        document.getElementById('choice_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 2];
+
+        $('#judge').on('click', function () {
+            result = document.forms.ansForm.choice.value;
+            if(result == data[3 * (parseInt(localStorage.getItem('ques_num'))) - 1][1]){
+                var point = parseInt(localStorage.getItem('point'));
+                point += 10;
+                localStorage.setItem('point', point);
+                document.getElementById("popup_correct").classList.toggle("is-show");
+                document.getElementById('point_disp').innerHTML = 'ポイント:' + localStorage.getItem('point');
+            }else{
+                document.getElementById('correct_choice').innerHTML = '正解は ' + data[3 * (parseInt(localStorage.getItem('ques_num'))) - 1];
+                document.getElementById("popup_incorrect").classList.toggle("is-show");
+            }
+
+            var ques_num = parseInt(localStorage.getItem('ques_num'));
+            ques_num++;
+            localStorage.setItem('ques_num', ques_num);
+        });
+
+        $('.confirm').on('click', function () {
+            if(document.getElementById("popup_correct").classList.contains('is-show')){
+                document.getElementById("popup_correct").classList.toggle("is-show");
+            }
+            if(document.getElementById("popup_incorrect").classList.contains('is-show')){
+                document.getElementById("popup_incorrect").classList.toggle("is-show");
+            }
+
+            if(parseInt(localStorage.getItem('ques_num')) > 4){
+                location.href = '/event/' + localStorage.getItem('event_id');
+            }
+
+            document.getElementById('ques_num_disp').innerHTML = '問題番号:' + localStorage.getItem('ques_num');
+            document.getElementById('ques_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 3];
+            document.getElementById('choice_txt_disp').innerHTML = data[3 * (parseInt(localStorage.getItem('ques_num'))) - 2];
+            for(element of document.getElementById('radio')){
+                element.checked = false;
+            }
+        });
+    </script>
+</html>

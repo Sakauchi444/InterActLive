@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Page</title>
+    </head>
+    <body>
+        <form>
+            <textarea type="text" name="name" id="disp_name" placeholder="名前"></textarea>
+        </form>
+        <button type="button" id="login" class="btn-default">登録</button>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </body>
+    <script>
+        localStorage.setItem('point', 2000);
+        $('#login').on('click', function () {
+            localStorage.setItem('current_user', document.getElementById("disp_name"));
+            location.href = '/';
+        });
+    </script>
+</html>

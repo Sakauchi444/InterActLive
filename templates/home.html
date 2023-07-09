@@ -165,5 +165,18 @@
         </section>
         {% endblock %}
 </body>
+<script>
+    var current_user = localStorage.getItem( "current_user" );
+    if (current_user){
+        current_user = JSON.parse(current_user);
+        if (current_user.value){
+        } else {
+        location.href = '/login';
+        }
+    } else {
+        location.href = '/login';
+    }
 
+    localStorage.setItem('ques_num', 1);
+</script>
 </html>
