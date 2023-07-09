@@ -165,5 +165,11 @@
         </section>
         {% endblock %}
 </body>
+<script>
+    if(!(localStorage.hasOwnProperty('current_user'))) {
+        location.href = '/login';
+    }
 
+    localStorage.setItem('ques_num', 1);
+</script>
 </html>

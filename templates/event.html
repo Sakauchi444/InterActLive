@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Page</title>
+    </head>
+    <body>
+        <h1>イベント：{{event_id}}</h1>
+        <h1 id="point_disp"></h1>
+
+        <a href="/">トップへ</a>
+        <a href="/question">問題ページへ</a>
+    </body>
+    <script>
+        localStorage.setItem('event_id', {{event_id}});
+        document.getElementById('point_disp').innerHTML = 'ポイント:' + localStorage.getItem('point');
+    </script>
+</html>
