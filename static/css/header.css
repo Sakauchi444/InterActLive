@@ -1,0 +1,39 @@
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	line-height: 60px;
+	background: #3c3c3c;
+	vertical-align: middle;
+}
+/* ロゴ */
+header .logo {
+	padding: 0 50px;
+	font-size: 18px;
+  font-weight: bold;
+	color: #fff;
+	letter-spacing: .2em;
+}
+header .logo a {
+  color: #fff;
+  text-decoration: none;
+}
+/* メニュー */
+header ul {
+	padding: 0 50px;
+}
+header li {
+	display: inline-block;
+	padding: 0 10px;
+	font-size: 14px;
+	letter-spacing: .1em;
+}
+header li a {
+	color: #fff;
+  text-decoration: none;
+}
+/* メニューのリンクホバーで線 */
+header li a:hover {
+	text-decoration: underline;
+}

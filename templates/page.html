@@ -1,36 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Page</title>
-    </head>
-    <body>
-      <form action = "/" method = "POST">
-         <H1>名前を表示するアプリケーション</H1>
-         <h1>入力</h1>
-         <textarea type="text" name="name" placeholder="名前"></textarea>
-         <br>
-         <input type="submit" value="実行">
-      </form>
-      <h1>出力</h1>
-      <p>{{text}}</p>
+<head>
+  <meta charset="utf-8">
+  <title>Page</title>
+</head>
 
-      <a href="/event/1">イベント1</a>
-      <a href="/event/2">イベント2</a>
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-   </body>
-   <script>
-      var current_user = localStorage.getItem( "current_user" );
-      if (current_user){
-         current_user = JSON.parse(current_user);
-         if (current_user.value){
-         } else {
-            location.href = '/login';
-         }
-      } else {
-         location.href = '/login';
-      }
+<body>
+  {% include "./components/header.html" %}
 
-      localStorage.setItem('ques_num', 1);
-   </script>
+  {% block content %}
+
+  
+  <form action="/" method="POST">
+    <h1>名前を表示するアプリケーション</h1>
+    <h1>入力</h1>
+    <textarea type="text" name="name" placeholder="名前"></textarea>
+    <br>
+    <input type="submit" value="実行">
+  </form>
+  <h1>出力</h1>
+  <p>{{text}}</p>
+  <form method="post" action="/reward">
+    <input type="submit" value="show reward">
+  </form>
+
+
+  {% endblock %}
+</body>
+
 </html>
