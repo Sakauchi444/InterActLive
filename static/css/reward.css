@@ -143,6 +143,43 @@ h2 {
 
 } */
 
+.btn,
+a.btn,
+button.btn {
+  border: none;
+  font-size: 12px;
+  font-weight: 1000;
+  line-height: 0.7;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+button.btn--yellow {
+  color: white;
+  background-color: #b3ae92;
+  border-bottom: 5px solid #7f7b68;
+}
+
+button.btn--yellow:hover {
+  margin-top: 3px;
+  color: white;
+  background: #b3ae92;
+  border-bottom: 2px solid #7f7b68;
+}
+
 /*マスキングテープ風*/
 .box75{
     margin: 2em auto;
@@ -151,11 +188,8 @@ h2 {
     position:relative;/*配置(ここを基準に)*/
 
     margin: auto;
-
     border: solid 3px #222F3E;
-
     border-radius: 10px;
-
     width: 250px;
     }
     .box75 .box-title {
