@@ -166,14 +166,7 @@
         {% endblock %}
 </body>
 <script>
-    var current_user = localStorage.getItem( "current_user" );
-    if (current_user){
-        current_user = JSON.parse(current_user);
-        if (current_user.value){
-        } else {
-        location.href = '/login';
-        }
-    } else {
+    if(!(localStorage.hasOwnProperty('current_user'))) {
         location.href = '/login';
     }
 
