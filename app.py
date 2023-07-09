@@ -6,8 +6,6 @@ import reward_list
 
 app = Flask(__name__)
 
-point = 100
-
 @app.route('/')
 def home():
     # 現在のイベントの写真リスト（ダミーデータ）
@@ -39,16 +37,13 @@ def home():
 @app.route("/exchange")
 def rewardlist():
     rewardlist= reward_list.main()
-    return render_template("reward.html",list = rewardlist,point=point)
+    return render_template("reward.html",list = rewardlist)
 
-@app.route("/recieve_reward")
-def recievereward():
-    global point
-    id = request.form.get('id')
+@app.route("/recieve_reward/<int:id>")
+def recievereward(id):
     print(id)
     usepoint,rewardlist = reward_list.point_change(id)
-    point -= usepoint
-    return render_template("complete_recieve.html",list = rewardlist,point=point)
+    return render_template("complete_recieve.html",list = rewardlist)
 
 ## 実行
 if __name__ == "__main__":

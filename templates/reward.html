@@ -22,12 +22,13 @@
         <section class="box">
           <h2 class="title">Reward<span>景品一覧</span></h2>
           <div>
-            <h2>交換する景品を選択してください</h2>
+            <h1>交換する景品を選択してください<br>保有ポイント{{point}}</h1>
             <script type="text/javascript">
               let list_data = {{ list | tojson }};
             </script>
-            <div id="table-wrapper"></div>
+            <div id="table-wrapper">
             <script type="text/javascript" src="../static/js/disp_reward.js"></script>
+          </div>
           </div>
         </section>
       </section>
