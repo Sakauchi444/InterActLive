@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Page</title>
-        <link rel="stylesheet" href="../static/css/reward.css">
-    </head>
-    <body>
-        <div id="contents">
-            <div id="main">
-              <section id="pagetop">
-                <section class="box">
-                  <h2 class="title">Reward<span>景品一覧</span></h2><br>
-                  <div>
-                    <h1>交換する景品を選択してください<br>保有ポイント：{{point}}</h1>
-                    <br>
-                    <script type="text/javascript">
-						let list_data = {{ list | tojson }};
-					</script> 
-                    <div id="table-wrapper">
-                      <script type="text/javascript" src = "../static/js/disp_reward.js"></script>
-                    </div>
-                  </div>
-                </section>
-              </section>
-            </div>
-          </div>
 
-   </body>
+<head>
+  <meta charset="utf-8">
+  <title>Page</title>
+  <link rel="stylesheet" href="../static/css/reward.css">
+  
+  <!-- ヘッダーCSS -->
+  <link rel="stylesheet" href="/static/css/header.css">
+  <!-- 全部のページに適用するCSS -->
+  <link rel="stylesheet" href="/static/css/all.css">
+</head>
+
+<body>
+  {% include "./components/header.html" %}
+
+  {% block content %}
+  <div id="contents">
+    <div id="main">
+      <section id="pagetop">
+        <section class="box">
+          <h2 class="title">Reward<span>景品一覧</span></h2>
+          <div>
+            <h2>交換する景品を選択してください</h2>
+            <script type="text/javascript">
+              let list_data = {{ list | tojson }};
+            </script>
+            <div id="table-wrapper"></div>
+            <script type="text/javascript" src="../static/js/disp_reward.js"></script>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+  {% endblock %}
+</body>
+
 </html>
