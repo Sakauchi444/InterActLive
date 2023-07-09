@@ -4,6 +4,103 @@
     <meta charset="utf-8">
     <title>{{eventdetail}}</title>
     <style>
+        *,
+        *:before,
+        *:after {
+        -webkit-box-sizing: inherit;
+        box-sizing: inherit;
+        }
+        .btn,
+        a.btn,
+        button.btn {
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1.5;
+        position: relative;
+        display: inline-block;
+        padding: 1rem 4rem;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        color: #212529;
+        border-radius: 0.5rem;
+        }
+
+        a.btn-emergency {
+        position: relative;
+        display: block;
+        width: 200px;
+        height: 130px;
+        margin: 0 auto;
+        }
+
+        a.btn-emergency:hover .btn-emergency-top {
+        top: 10px;
+        height: 50px;
+        }
+
+        a.btn-emergency:active .btn-emergency-top {
+        top: 20px;
+        height: 40px;
+        }
+
+        .btn-emergency-top {
+        position: absolute;
+        top: 0;
+        left: 20px;
+        width: 160px;
+        height: 60px;
+        margin-top: 30px;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 0 0 50% 50%;
+        background: #d62d2d;
+        }
+
+        .btn-emergency-top:before {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        width: 160px;
+        height: 60px;
+        content: "";
+        border-radius: 80px / 30px;
+        background: #ed4c4c;
+        }
+
+        .btn-emergency-top span {
+        font-size: 38px;
+        font-weight: bold;
+        position: absolute;
+        top: -24px;
+        left: 0;
+        width: 100%;
+        -webkit-transform: scaleY(0.75);
+        transform: scaleY(0.75);
+        text-align: center;
+        color: #f6a3a3;
+        }
+
+        .btn-emergency-bottom {
+        position: absolute;
+        top: 38px;
+        left: 0;
+        width: 200px;
+        height: 80px;
+
+        border-radius: 100px / 40px;
+        background: #d8e4ea;
+        -webkit-box-shadow: 0 8px 0 #c4cacc;
+        box-shadow: 0 8px 0 #c4cacc;
+        }
         h1 {
             text-align: center;
         }
@@ -19,6 +116,22 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: filter 0.3s;
         }
+        .display-none {
+            display: none;
+        }
+        #to_ques {
+            padding-top: 30px;
+        }
+        #answered {
+            font-size: 2rem;
+            font-weight:bold;
+            text-align: center;
+            width: 400px;
+            margin: 2em auto;
+            padding:0.5em;
+            border-radius:30px;
+            background-color:#fd9e97;
+        }
     </style>
     <!-- ヘッダーCSS -->
     <link rel="stylesheet" href="/static/css/header.css">
@@ -32,11 +145,25 @@
         <div class="event-img-box">
             <img src="{{ image }}" class="event-image">
         </div>
-
-        <a href="/question">問題ページへ</a>
+        <div class="display-none" id="to_ques">
+            <a href="/question" class=" btn-emergency">
+                <span class="btn-emergency-bottom"></span>
+                <span class="btn-emergency-top"><span></span></span>
+            </a>
+        </div>
+        <div class="display-none" id="answered">
+            <p>解答済みです</p>
+        </div>
     {% endblock %}
 </body>
 <script>
     localStorage.setItem('event_id', {{event_id}});
+    if({{event_id}} == 3){
+        if(parseInt(localStorage.getItem('ques_num')) <= 4){
+            document.getElementById("to_ques").classList.toggle("display-none");
+        }else{
+            document.getElementById("answered").classList.toggle("display-none");
+        }
+    }
 </script>
 </html>
