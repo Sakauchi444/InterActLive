@@ -24,6 +24,10 @@ def main_page():
         text = "こんにちは" + name + "さん"
         return render_template("page.html",text=text)
 
+@app.route("/login", methods=["GET"])
+def login():
+    return render_template("login.html")
+
 @app.route("/event/<int:id>", methods=["GET"])
 def event(id):
     return render_template("event.html", event_id=id)

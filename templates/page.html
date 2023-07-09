@@ -14,11 +14,23 @@
       </form>
       <h1>出力</h1>
       <p>{{text}}</p>
+
       <a href="/event/1">イベント1</a>
       <a href="/event/2">イベント2</a>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
    </body>
    <script>
-      localStorage.setItem('point', 0);
+      var current_user = localStorage.getItem( "current_user" );
+      if (current_user){
+         current_user = JSON.parse(current_user);
+         if (current_user.value){
+         } else {
+            location.href = '/login';
+         }
+      } else {
+         location.href = '/login';
+      }
+
       localStorage.setItem('ques_num', 1);
    </script>
 </html>
