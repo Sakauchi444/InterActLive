@@ -10,6 +10,10 @@ for (var i=0; i<list_data.length; i++){
 function recieve_reward(id){
     console.log(id)
     var point = parseInt(localStorage.getItem('point'));
+    if (point - Number(list_data[id-1].price) < 0){
+        alert('ポイントが足りません')
+        return
+    }
     point = point - Number(list_data[id-1].price);
     localStorage.setItem('point', point);
     location.href = '/recieve_reward/' + Number(id);

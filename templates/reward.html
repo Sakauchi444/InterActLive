@@ -22,7 +22,7 @@
         <section class="box">
           <h2 class="title"><span>商品一覧</span></h2>
           <div>
-            <h1>交換する景品を選択してください<br>保有ポイント{{point}}</h1>
+            <h1>交換する景品を選択してください<br>保有ポイント<script type="text/javascript">document.write(localStorage.getItem('point'))</script></h1>
             <script type="text/javascript">
               let list_data = {{ list | tojson }};
             </script>
