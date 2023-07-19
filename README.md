@@ -5,7 +5,7 @@
 ## 要件書
 [こちらへ](./docs/Mission.md)
 
-## プレゼンテーション
+## プレゼンテーション（最終発表）
 [こちらへ](./docs/OverWalkers_final_presentation.pdf)
 
 
