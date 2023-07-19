@@ -1,6 +1,9 @@
-# サービス名：　InterActLive
+# InterActLive
 
 ## 概要
+
+## 要件書
+[こちらへ](./docs/Mission.md)
 
 ## 開発期間
 - アイデアソン（１日）
