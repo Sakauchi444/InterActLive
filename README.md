@@ -5,6 +5,10 @@
 ## 要件書
 [こちらへ](./docs/Mission.md)
 
+## プレゼンテーション
+[こちらへ](./docs/OverWalkers_final_presentation.pdf)
+
+
 ## 開発期間
 - アイデアソン（１日）
 - 設計（１日）
